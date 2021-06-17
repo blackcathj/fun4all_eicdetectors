@@ -157,7 +157,7 @@ void PHG4BackwardHcalSubsystem::SetDefaultParameters()
     gSystem->Exit(1);
   }
 
-  mappingfilename << "/BackwardHcal/mapping/towerMap_FHCAL_v005.txt";
+  mappingfilename << "/BackwardHcal/mapping/towerMap_EHCAL_default.txt";
   set_default_string_param("mapping_file", mappingfilename.str());
   set_default_string_param("mapping_file_md5", PHG4Utils::md5sum(mappingfilename.str()));
   set_default_string_param("scintillator", "G4_POLYSTYRENE");
