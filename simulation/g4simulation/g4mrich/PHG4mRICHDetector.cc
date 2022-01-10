@@ -666,53 +666,53 @@ void PHG4mRICHDetector::build_aerogel(mRichParameter* detectorParameter, G4VPhys
   G4VPhysicalVolume* aerogel = build_box(detectorParameter->GetBoxPar("aerogel"), motherPV->GetLogicalVolume());
   aerogel_vol[aerogel] = 0;
 
-  G4OpticalSurface* OpWaterSurface = new G4OpticalSurface("WaterSurface");
-  OpWaterSurface->SetType(dielectric_dielectric);
-  OpWaterSurface->SetFinish(ground);
-  OpWaterSurface->SetModel(unified);
-  new G4LogicalBorderSurface("WaterSurface", aerogel, motherPV, OpWaterSurface);
-
-  const G4int num = 2;
-  G4double Ephoton[num] = {2.034 * eV, 4.136 * eV};
-  G4double RefractiveIndex[num] = {1.03, 1.03};
-  G4double SpecularLobe[num] = {0.3, 0.3};
-  G4double SpecularSpike[num] = {0.2, 0.2};
-  G4double Backscatter[num] = {0.2, 0.2};
-
-  G4MaterialPropertiesTable* myST1 = new G4MaterialPropertiesTable();
-  myST1->AddProperty("RINDEX", Ephoton, RefractiveIndex, num);
-  myST1->AddProperty("SPECULARLOBECONSTANT", Ephoton, SpecularLobe, num);
-  myST1->AddProperty("SPECULARSPIKECONSTANT", Ephoton, SpecularSpike, num);
-  myST1->AddProperty("BACKSCATTERCONSTANT", Ephoton, Backscatter, num);
-
-  OpWaterSurface->SetMaterialPropertiesTable(myST1);
+//  G4OpticalSurface* OpWaterSurface = new G4OpticalSurface("WaterSurface");
+//  OpWaterSurface->SetType(dielectric_dielectric);
+//  OpWaterSurface->SetFinish(ground);
+//  OpWaterSurface->SetModel(unified);
+////  new G4LogicalBorderSurface("WaterSurface", aerogel, motherPV, OpWaterSurface);
+//
+//  const G4int num = 2;
+//  G4double Ephoton[num] = {2.034 * eV, 4.136 * eV};
+//  G4double RefractiveIndex[num] = {1.03, 1.03};
+//  G4double SpecularLobe[num] = {0.3, 0.3};
+//  G4double SpecularSpike[num] = {0.2, 0.2};
+//  G4double Backscatter[num] = {0.2, 0.2};
+//
+//  G4MaterialPropertiesTable* myST1 = new G4MaterialPropertiesTable();
+//  myST1->AddProperty("RINDEX", Ephoton, RefractiveIndex, num);
+//  myST1->AddProperty("SPECULARLOBECONSTANT", Ephoton, SpecularLobe, num);
+//  myST1->AddProperty("SPECULARSPIKECONSTANT", Ephoton, SpecularSpike, num);
+//  myST1->AddProperty("BACKSCATTERCONSTANT", Ephoton, Backscatter, num);
+//
+//  OpWaterSurface->SetMaterialPropertiesTable(myST1);
 }
 //________________________________________________________________________//
 void PHG4mRICHDetector::build_mirror(mRichParameter* detectorParameter, G4VPhysicalVolume* motherPV)
 {
-  G4VPhysicalVolume* mirror = build_polyhedra(detectorParameter->GetPolyPar("mirror"), motherPV->GetLogicalVolume());
+  /*G4VPhysicalVolume* mirror = */build_polyhedra(detectorParameter->GetPolyPar("mirror"), motherPV->GetLogicalVolume());
 
-  //-----------
-  //   Optical properties of the interface between the Air and Reflective Surface
-  //   For Mirror, reflectivity is set at 95% and specular reflection is assumed.
-  //-----------
-  G4OpticalSurface* OpticalAirMirror = new G4OpticalSurface("AirMirrorSurface");
-  OpticalAirMirror->SetModel(unified);
-  OpticalAirMirror->SetType(dielectric_dielectric);
-  OpticalAirMirror->SetFinish(polishedfrontpainted);
+//  //-----------
+//  //   Optical properties of the interface between the Air and Reflective Surface
+//  //   For Mirror, reflectivity is set at 95% and specular reflection is assumed.
+//  //-----------
+//  G4OpticalSurface* OpticalAirMirror = new G4OpticalSurface("AirMirrorSurface");
+//  OpticalAirMirror->SetModel(unified);
+//  OpticalAirMirror->SetType(dielectric_dielectric);
+//  OpticalAirMirror->SetFinish(polishedfrontpainted);
 
-  const G4int NUM = 2;
-  G4double lambda_min = 200 * nm;
-  G4double lambda_max = 700 * nm;
+//  const G4int NUM = 2;
+//  G4double lambda_min = 200 * nm;
+//  G4double lambda_max = 700 * nm;
+//
+//  G4double XX[NUM] = {h_Planck * c_light / lambda_max, h_Planck * c_light / lambda_min};
+//  G4double ICEREFLECTIVITY[NUM] = {0.95, 0.95};
 
-  G4double XX[NUM] = {h_Planck * c_light / lambda_max, h_Planck * c_light / lambda_min};
-  G4double ICEREFLECTIVITY[NUM] = {0.95, 0.95};
+//  G4MaterialPropertiesTable* AirMirrorMPT = new G4MaterialPropertiesTable();
+//  AirMirrorMPT->AddProperty("REFLECTIVITY", XX, ICEREFLECTIVITY, NUM);
+//  OpticalAirMirror->SetMaterialPropertiesTable(AirMirrorMPT);
 
-  G4MaterialPropertiesTable* AirMirrorMPT = new G4MaterialPropertiesTable();
-  AirMirrorMPT->AddProperty("REFLECTIVITY", XX, ICEREFLECTIVITY, NUM);
-  OpticalAirMirror->SetMaterialPropertiesTable(AirMirrorMPT);
-
-  new G4LogicalBorderSurface("Air/Mirror Surface", motherPV, mirror, OpticalAirMirror);
+//  new G4LogicalBorderSurface("Air/Mirror Surface", motherPV, mirror, OpticalAirMirror);
 }
 //________________________________________________________________________//
 void PHG4mRICHDetector::build_sensor(mRichParameter* detectorParameter, G4LogicalVolume* motherLV)
