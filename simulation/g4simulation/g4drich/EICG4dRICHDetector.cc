@@ -81,27 +81,27 @@ void EICG4dRICHDetector::ConstructMe(G4LogicalVolume *logicWorld)
     volmgr->DumpG4SolidList();
   }
 
-  // material optical properties (see shared header EICG4dRICHOptics.hh)
-  // - aerogel
-  auto aeroPO = new EICG4dRICHAerogel("EICG4dRICHaerogelMat");
-  aeroPO->setOpticalParams(cfg.aerOptModel);  // mode=3: use experimental data
-  // - acrylic filter
-  if (Verbosity() >= Fun4AllBase::VERBOSITY_MORE)
-  {
-    std::cout << "[+] Acrylic Wavelength Threshold : " << cfg.filter_thr / (nm) << " nm\n"
-              << std::endl;
-  }
-  auto acryPO = new EICG4dRICHFilter("EICG4dRICHfilterMat");
-  acryPO->setOpticalParams(cfg.filter_thr);
-  // - gas radiator
-  auto gasPO = new EICG4dRICHGas("EICG4dRICHgasMat");
-  gasPO->setOpticalParams();
-  // - photo sensors
-  auto photoSensor = new EICG4dRICHPhotosensor("EICG4dRICHpsst");
-  photoSensor->setOpticalParams("EICG4dRICH");
-  // - mirror (simular to photosensor, but different params)
-  auto mirror = new EICG4dRICHMirror("EICG4dRICHmirror");
-  mirror->setOpticalParams("EICG4dRICH");
+//  // material optical properties (see shared header EICG4dRICHOptics.hh)
+//  // - aerogel
+//  auto aeroPO = new EICG4dRICHAerogel("EICG4dRICHaerogelMat");
+//  aeroPO->setOpticalParams(cfg.aerOptModel);  // mode=3: use experimental data
+//  // - acrylic filter
+//  if (Verbosity() >= Fun4AllBase::VERBOSITY_MORE)
+//  {
+//    std::cout << "[+] Acrylic Wavelength Threshold : " << cfg.filter_thr / (nm) << " nm\n"
+//              << std::endl;
+//  }
+//  auto acryPO = new EICG4dRICHFilter("EICG4dRICHfilterMat");
+//  acryPO->setOpticalParams(cfg.filter_thr);
+//  // - gas radiator
+//  auto gasPO = new EICG4dRICHGas("EICG4dRICHgasMat");
+//  gasPO->setOpticalParams();
+//  // - photo sensors
+//  auto photoSensor = new EICG4dRICHPhotosensor("EICG4dRICHpsst");
+//  photoSensor->setOpticalParams("EICG4dRICH");
+//  // - mirror (simular to photosensor, but different params)
+//  auto mirror = new EICG4dRICHMirror("EICG4dRICHmirror");
+//  mirror->setOpticalParams("EICG4dRICH");
 
   G4RotationMatrix *rotation = new G4RotationMatrix(m_Params->get_double_param("rot_x") * deg,
                                                     m_Params->get_double_param("rot_y") * deg,
